@@ -15,7 +15,7 @@ ENV \
     # the IP range of the WireGuard interface (do NOT include the final number)
     WIREGUARD_IP_RANGE=192.168.100 \
     # the IP address or name of the DNS resolver
-    WIREGUARD_DNS=1.1.1.1 \
+    WIREGUARD_DNS=127.0.0.11 \
     # space-separated list of WireGuard peers
     WIREGUARD_PEERS=
 
