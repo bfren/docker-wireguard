@@ -1,5 +1,5 @@
 [Interface]
-Address = <%= ${WIREGUARD_IP_RANGE} %>.<%= ${PEER_NUM} %>
+Address = <%= ${WIREGUARD_IP_RANGE} %>.<%= ${PEER_NUM} %>/24
 PrivateKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRIVATEKEY_FILE}` %>
 ListenPort = 51820
 DNS = <%= ${WIREGUARD_IP_RANGE} %>.1
