@@ -5,7 +5,6 @@ LABEL org.opencontainers.image.source="https://github.com/bfren/docker-wireguard
 ARG BF_IMAGE
 ARG BF_VERSION
 
-#EXPOSE 53/udp
 EXPOSE 51820/udp
 
 ENV \
@@ -17,7 +16,7 @@ ENV \
     WIREGUARD_IP_RANGE=192.168.100 \
     # the IP address or name of the DNS resolver
     WIREGUARD_DNS=1.1.1.1 \
-    # space-separated list of WireGuard peers
+    # space-separated list of WireGuard peers - these will be created automatically
     WIREGUARD_PEERS=
 
 COPY ./overlay /

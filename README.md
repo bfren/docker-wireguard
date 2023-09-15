@@ -10,6 +10,7 @@ Comes with [WireGuard](https://www.wireguard.com/) pre-installed.
 
 * [Ports](#ports)
 * [Volumes](#volumes)
+* [Environment Variables](#environment-variables)
 * [Licence / Copyright](#licence)
 
 ## Ports
@@ -21,6 +22,16 @@ Comes with [WireGuard](https://www.wireguard.com/) pre-installed.
 | Volume    | Purpose                                       |
 | --------- | --------------------------------------------- |
 | `/config` | Stores server and peer configuration values.  |
+
+## Environment Variables
+
+| Variable                      | Values | Description                                                                              | Default               |
+| ----------------------------- | ------ | ---------------------------------------------------------------------------------------- | --------------------- |
+| `WIREGUARD_EXTERNAL_ADDRESS`  | string | The external IP Address or domain of the server - peers will use this to connect.        | *None* - **required** |
+| `WIREGUARD_INTERFACE`         | string | The name to use for the WireGuard interface.                                             | wg0                   |
+| `WIREGUARD_IP_RANGE`          | string | The IP range to use for the WireGuard host and peers - **without** the final segment.    | 192.168.100           |
+| `WIREGUARD_DNS`               | string | The IP Address of an upstream DNS resolver.                                              | 1.1.1.1 (Cloudflare)  |
+| `WIREGUARD_PEERS`             | string | List of peers to create on startup.                                                      | *Blank*               |
 
 ## Licence
 
