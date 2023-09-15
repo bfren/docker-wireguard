@@ -14,7 +14,6 @@ wg-conf peer1
 
 # show configuration as QR code
 wg-qr peer1
-
 ```
 
 ## Contents
