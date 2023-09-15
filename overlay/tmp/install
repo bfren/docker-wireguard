@@ -20,19 +20,9 @@ bf-echo "WireGuard version ${VERSION}."
 
 bf-echo "Installing WireGuard v${VERSION}..."
 apk add --no-cache \
-    bc \
-    coredns \
-    gnupg \
-    grep \
-    iproute2 \
+    bash \
     iptables \
-    ip6tables \
-    iputils \
-    libcap-utils \
     libqrencode \
-    net-tools \
-    openresolv \
-    perl \
     wireguard-tools=${VERSION}
 bf-done
 
