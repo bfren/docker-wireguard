@@ -13,7 +13,7 @@ bf-echo "Generating peer keys and configuration..."
 for I in "${!WIREGUARD_PEERS[@]}" ; do
 
     # get values as variables
-    export PEER_NUM=((${I} + 2))
+    export PEER_NUM=$((${I}+2))
     export PEER_NAME=${PEERS[${I}]}
     bf-echo " .. ${PEER_NAME}"
 
