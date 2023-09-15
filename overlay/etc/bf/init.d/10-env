@@ -1,0 +1,15 @@
+#!/command/with-contenv sh
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Set environment variables.
+#======================================================================================================================
+
+WIREGUARD_CONFIG_D=/etc/wireguard
+bf-env "WIREGUARD_CONFIG_D" "${WIREGUARD_CONFIG_D}"
+bf-env "WIREGUARD_CONF" "${WIREGUARD_CONFIG_D}/${WIREGUARD_INTERFACE}.conf"
+bf-env "WIREGUARD_PRIVATE_KEY_FILE" "${WIREGUARD_CONFIG_D}/privatekey"
+bf-env "WIREGUARD_PUBLIC_KEY_FILE" "${WIREGUARD_CONFIG_D}/publickey"
