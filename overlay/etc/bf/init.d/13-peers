@@ -21,7 +21,8 @@ for I in ${!PEERS[@]} ; do
 
     # ensure peer directory exists
     PEER_D=${WIREGUARD_PEERS_D}/${PEER_NAME}
-    mkdir ${PEER_D} && cd ${PEER_D}
+    [[ -d "${PEER_D}" ]] || mkdir ${PEER_D}
+    cd ${PEER_D}
 
     # if the public and private keys do not exist, create them
     if [ ! -f "${WIREGUARD_PEER_PRIVATEKEY_FILE}" ] || [ ! -f "${WIREGUARD_PEER_PUBLICKEY_FILE}" ] ; then
