@@ -19,7 +19,3 @@ bf-env "WIREGUARD_PEER_PUBLICKEY_FILE" "publickey"
 bf-env "WIREGUARD_PEER_PRESHAREDKEY_FILE" "presharedkey"
 
 bf-env "WIREGUARD_QR_ENCODING" "ansiutf8"
-
-COREDNS_CONF_D=/etc/coredns
-bf-env "COREDNS_CONF_D" "${COREDNS_CONF_D}"
-bf-env "COREDNS_CONF" "${COREDNS_CONF_D}/coredns.conf"
