@@ -1,8 +1,12 @@
 [Interface]
-Address = <%= ${WIREGUARD_IP_ADDRESS} %>/24
+Address = <%= ${WIREGUARD_IP_RANGE} %>.1/24
 DNS = <%= ${WIREGUARD_DNS} %>
 ListenPort = 51820
 MTU = <%= ${WIREGUARD_SERVER_MTU:-1420} %>
 PrivateKey = <%= ${PRIVATE_KEY} %>
 PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth+ -j MASQUERADE
 PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o eth+ -j MASQUERADE
+
+<% for I in "${!WIREGUARD_PEERS[@]}" ; do ; export PEER_NUM=((${I} + 2)) ; export PEER_NAME=${PEERS[${I}]} ; %>
+<%+ ./peer-definition.part.esh %>
+<% done %>

@@ -8,12 +8,16 @@ ARG BF_VERSION
 EXPOSE 51820/udp
 
 ENV \
+    # the IP address or name of the host server
+    WIREGUARD_EXTERNAL_ADDRESS= \
     # the name of the WireGuard interface
     WIREGUARD_INTERFACE=wg0 \
-    # the IP address of the WireGuard interface
-    WIREGUARD_IP_ADDRESS=192.168.100.1 \
+    # the IP range of the WireGuard interface (do NOT include the final number)
+    WIREGUARD_IP_RANGE=192.168.100. \
     # the IP address or name of the DNS resolver
-    WIREGUARD_DNS=1.1.1.1
+    WIREGUARD_DNS=1.1.1.1 \
+    # space-separated list of WireGuard peers
+    WIREGUARD_PEERS=
 
 COPY ./overlay /
 

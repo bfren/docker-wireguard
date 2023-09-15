@@ -1,0 +1,10 @@
+[Interface]
+PrivateKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRIVATEKEY_FILE}` %>
+Address = <%= ${WIREGUARD_IP_RANGE} %><%= ${PEER_NUM} %>/24
+DNS = <%= ${WIREGUARD_DNS} %>
+
+[Peer]
+PublicKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PUBLICKEY_FILE}` %>
+PresharedKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRESHAREDKEY_FILE}` %>
+Endpoint = <%= ${WIREGUARD_EXTERNAL_ADDRESS} %>:51820
+AllowedIPs = 0.0.0.0/0, ::0/0
