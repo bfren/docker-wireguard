@@ -2,5 +2,5 @@
 [Peer]
 PublicKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PUBLICKEY_FILE}` %>
 PresharedKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRESHAREDKEY_FILE}` %>
-AllowedIPs = <%= ${WIREGUARD_IP_RANGE} %><%= ${PEER_NUM} %>/32
+AllowedIPs = <%= ${WIREGUARD_IP_RANGE} %>.<%= ${PEER_NUM} %>/32
 ### /<%= ${PEER_NAME} %> ###
