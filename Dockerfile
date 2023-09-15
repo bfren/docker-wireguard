@@ -23,4 +23,4 @@ COPY ./overlay /
 
 RUN bf-install
 
-VOLUME [ "/etc/wireguard" ]
+VOLUME [ "/config" ]

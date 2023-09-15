@@ -16,6 +16,6 @@ docker buildx build \
         -e WIREGUARD_EXTERNAL_ADDRESS=${2:-changeme} \
         -e WIREGUARD_PEERS="foo bar" \
         -p "0.0.0.0:${1:-51820}:51820/udp" \
-        -v $PWD/config:/etc/wireguard \
+        -v $PWD/config:/config \
         wireguard-dev \
         sh

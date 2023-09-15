@@ -8,4 +8,4 @@ export BF_E="${PWD##*/}/$(basename ${0})"
 # Run WireGuard service.
 #======================================================================================================================
 
-wg-quick up ${WIREGUARD_INTERFACE}
+wg-quick up ${WIREGUARD_CONF}
