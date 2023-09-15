@@ -6,11 +6,23 @@
 
 Comes with [WireGuard](https://www.wireguard.com/) pre-installed.
 
+Once started you can show configuration for a peer in two ways:
+
+```bash
+# show configuration as text
+wg-conf peer1
+
+# show configuration as QR code
+wg-qr peer1
+
+```
+
 ## Contents
 
 * [Ports](#ports)
 * [Volumes](#volumes)
 * [Environment Variables](#environment-variables)
+* [Helper Functions](#helper-functions)
 * [Licence / Copyright](#licence)
 
 ## Ports
@@ -32,6 +44,13 @@ Comes with [WireGuard](https://www.wireguard.com/) pre-installed.
 | `WIREGUARD_IP_RANGE`          | string | The IP range to use for the WireGuard host and peers - **without** the final segment.    | 192.168.100           |
 | `WIREGUARD_DNS`               | string | The IP Address of an upstream DNS resolver.                                              | 1.1.1.1 (Cloudflare)  |
 | `WIREGUARD_PEERS`             | string | List of peers to create on startup.                                                      | *Blank*               |
+
+## Helper Functions
+
+| Function  | Arguments     | Description                                   |
+| --------- | ------------- | --------------------------------------------- |
+| `wg-conf` | 0: Peer name  | Display a peer's configuration as text.       |
+| `wg-qr`   | 0: Peer name  | Display a peer's configuration as a QR code.  |
 
 ## Licence
 
