@@ -17,3 +17,5 @@ bf-env "WIREGUARD_PEERS_D" "${WIREGUARD_CONFIG_D}/peers.d"
 bf-env "WIREGUARD_PEER_PRIVATEKEY_FILE" "privatekey"
 bf-env "WIREGUARD_PEER_PUBLICKEY_FILE" "publickey"
 bf-env "WIREGUARD_PEER_PRESHAREDKEY_FILE" "presharedkey"
+
+bf-env "WIREGUARD_QR_ENCODING" "ansiutf8"
