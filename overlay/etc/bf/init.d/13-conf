@@ -9,7 +9,6 @@ export BF_E=`basename ${0}`
 #======================================================================================================================
 
 bf-echo "Generating WireGuard server configuration."
-export PRIVATE_KEY=`cat ${WIREGUARD_SERVER_PRIVATEKEY}`
 esh \
     -o ${WIREGUARD_CONF} \
     -s /bin/bash \
