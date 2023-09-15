@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.source="https://github.com/bfren/docker-wireguard
 ARG BF_IMAGE
 ARG BF_VERSION
 
+EXPOSE 53/udp
 EXPOSE 51820/udp
 
 ENV \
