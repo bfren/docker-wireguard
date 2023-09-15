@@ -10,7 +10,7 @@ export BF_E=`basename ${0}`
 
 if [ ! -f "${WIREGUARD_CONF}" ] ; then
     bf-echo "Generating WireGuard configuration..."
-    PRIVATE_KEY=`cat ${WIREGUARD_PRIVATE_KEY_FILE}`
+    export PRIVATE_KEY=`cat ${WIREGUARD_PRIVATE_KEY_FILE}`
     bf-esh \
         ${BF_TEMPLATES}/interface.conf.esh \
         ${WIREGUARD_CONF}
