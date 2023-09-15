@@ -14,13 +14,3 @@ esh \
     -o ${WIREGUARD_CONF} \
     -s /bin/bash \
     ${BF_TEMPLATES}/interface.conf.esh
-
-
-#======================================================================================================================
-# Generate CoreDNS configuration.
-#======================================================================================================================
-
-bf-echo "Generating CoreDNS configuration."
-bf-esh \
-    ${BF_TEMPLATES}/coredns.conf.esh \
-    ${COREDNS_CONF}

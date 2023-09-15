@@ -1,5 +1,0 @@
-.:53 {
-    loop
-    health
-    forward . <%= ${WIREGUARD_DNS} %>
-}
