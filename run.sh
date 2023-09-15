@@ -12,6 +12,7 @@ docker buildx build \
     && \
     docker run -it \
         --cap-add=NET_ADMIN \
+        -e BF_DEBUG=1 \
         -e WIREGUARD_EXTERNAL_ADDRESS=changeme \
         -e WIREGUARD_PEERS="foo bar" \
         -p "0.0.0.0:${1}:51820/udp" \

@@ -8,10 +8,10 @@ export BF_E=`basename ${0}`
 # Generate WireGuard keys.
 #======================================================================================================================
 
-# if [ ! -f "${WIREGUARD_PRIVATE_KEY_FILE}" ] ; then
-#     bf-echo "Generating WireGuard keys..."
-#     umask 077; wg genkey | tee ${WIREGUARD_PRIVATE_KEY_FILE} | wg pubkey > ${WIREGUARD_PUBLIC_KEY_FILE}
-#     bf-done
-# else
-#     bf-debug "WireGuard keys already exist."
-# fi
+if [ ! -f "${WIREGUARD_PRIVATE_KEY_FILE}" ] ; then
+    bf-echo "Generating WireGuard keys..."
+    umask 077 ; wg genkey | tee ${WIREGUARD_PRIVATE_KEY_FILE} | wg pubkey > ${WIREGUARD_PUBLIC_KEY_FILE}
+    bf-done
+else
+    bf-debug "WireGuard keys already exist."
+fi
