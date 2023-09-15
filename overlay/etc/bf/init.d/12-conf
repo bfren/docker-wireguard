@@ -9,7 +9,8 @@ export BF_E=`basename ${0}`
 #======================================================================================================================
 
 export PRIVATE_KEY=`cat ${WIREGUARD_PRIVATE_KEY_FILE}`
-bf-esh \
-    ${BF_TEMPLATES}/interface.conf.esh \
-    ${WIREGUARD_CONF}
+esh \
+    -o ${WIREGUARD_CONF} \
+    -s /bin/bash \
+    ${BF_TEMPLATES}/interface.conf.esh
 bf-done
