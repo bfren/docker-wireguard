@@ -1,6 +1,5 @@
 [Interface]
 Address = <%= ${WIREGUARD_IP_RANGE} %>.1
-DNS = <%= ${WIREGUARD_DNS} %>
 ListenPort = 51820
 PrivateKey = <%= ${PRIVATE_KEY} %>
 PostUp = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o eth+ -j MASQUERADE
