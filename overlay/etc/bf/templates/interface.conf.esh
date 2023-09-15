@@ -1,5 +1,6 @@
 [Interface]
 Address = <%= ${WIREGUARD_IP_ADDRESS} %>/24
+DNS = <%= ${WIREGUARD_DNS} %>
 ListenPort = 51820
 MTU = <%= ${WIREGUARD_SERVER_MTU:-1420} %>
 PrivateKey = <%= ${PRIVATE_KEY} %>

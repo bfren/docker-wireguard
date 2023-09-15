@@ -12,7 +12,6 @@ docker buildx build \
     && \
     docker run -it \
         --cap-add=NET_ADMIN \
-        --cap-add=SYS_MODULE \
         -p "0.0.0.0:${1}:51820" \
         wireguard-dev \
         sh
