@@ -15,12 +15,12 @@ ENV \
     # the IP range of the WireGuard interface (do NOT include the final number)
     WIREGUARD_IP_RANGE=192.168.100 \
     # the IP address or name of the DNS resolver
-    WIREGUARD_PEER_DNS=1.1.1.1 \
-    # space-separated list of WireGuard peers
+    WIREGUARD_DNS=1.1.1.1 \
+    # space-separated list of WireGuard peers - these will be created automatically
     WIREGUARD_PEERS=
 
 COPY ./overlay /
 
 RUN bf-install
 
-VOLUME [ "/etc/wireguard" ]
+VOLUME [ "/config" ]
