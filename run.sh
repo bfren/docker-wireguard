@@ -12,13 +12,10 @@ docker buildx build \
     && \
     docker run -it \
         --cap-add=NET_ADMIN \
-        --cap-add=SYS_MODULE \
         -e BF_DEBUG=1 \
-        -e WIREGUARD_EXTERNAL_ADDRESS=changeme \
+        -e WIREGUARD_EXTERNAL_ADDRESS=${2:-changeme} \
         -e WIREGUARD_PEERS="foo bar" \
-        -p "0.0.0.0:${1}:51820/udp" \
+        -p "0.0.0.0:${1:-51820}:51820/udp" \
         -v $PWD/config:/etc/wireguard \
-        -v /lib/modules:/lib/modules \
-        --sysctl="net.ipv4.conf.all.src_valid_mark=1" \
         wireguard-dev \
         sh
