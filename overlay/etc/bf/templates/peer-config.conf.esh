@@ -1,7 +1,8 @@
 [Interface]
-PrivateKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRIVATEKEY_FILE}` %>
-Address = <%= ${WIREGUARD_IP_RANGE} %>.<%= ${PEER_NUM} %>/24
+Address = <%= ${WIREGUARD_IP_RANGE} %>.<%= ${PEER_NUM} %>
 DNS = <%= ${WIREGUARD_DNS} %>
+ListenPort = 51820
+PrivateKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRIVATEKEY_FILE}` %>
 
 [Peer]
 PublicKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PUBLICKEY_FILE}` %>
