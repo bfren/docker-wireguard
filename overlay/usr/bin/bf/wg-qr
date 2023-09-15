@@ -17,6 +17,6 @@ PEER="${1}"
 #======================================================================================================================
 
 CONFIG=${WIREGUARD_PEERS_D}/${PEER}/config
-[[ -f ${CONFIG} ]] || bf-error "Configuration for ${PEER} does not exist." "wg-qr"
+[[ -f ${CONFIG} ]] || bf-error "Configuration file for ${PEER} does not exist." "wg-qr"
 
 qrencode -t "${WIREGUARD_QR_ENCODING}" < ${CONFIG}
