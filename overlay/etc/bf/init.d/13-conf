@@ -8,9 +8,19 @@ export BF_E=`basename ${0}`
 # Generate WireGuard configuration.
 #======================================================================================================================
 
+bf-echo "Generating WireGuard server configuration."
 export PRIVATE_KEY=`cat ${WIREGUARD_SERVER_PRIVATEKEY}`
 esh \
     -o ${WIREGUARD_CONF} \
     -s /bin/bash \
     ${BF_TEMPLATES}/interface.conf.esh
-bf-done
+
+
+#======================================================================================================================
+# Generate CoreDNS configuration.
+#======================================================================================================================
+
+bf-echo "Generating CoreDNS configuration."
+bf-esh \
+    ${BF_TEMPLATES}/coredns.conf.esh \
+    ${COREDNS_CONF}
