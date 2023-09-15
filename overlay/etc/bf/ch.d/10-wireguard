@@ -1,0 +1,2 @@
+/etc/s6-overlay/s6-rc.d/wireguard/finish root:root 0770 0770
+/etc/s6-overlay/s6-rc.d/wireguard/run root:root 0770 0770

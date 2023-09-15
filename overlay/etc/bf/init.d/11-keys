@@ -1,0 +1,17 @@
+#!/command/with-contenv bash
+
+set -euo pipefail
+export BF_E=`basename ${0}`
+
+
+#======================================================================================================================
+# Generate WireGuard keys.
+#======================================================================================================================
+
+if [ ! -f "${WIREGUARD_SERVER_PRIVATEKEY}" ] ; then
+    bf-echo "Generating WireGuard keys..."
+    umask 077 ; wg genkey | tee ${WIREGUARD_SERVER_PRIVATEKEY} | wg pubkey > ${WIREGUARD_SERVER_PUBLICKEY}
+    bf-done
+else
+    bf-debug "WireGuard keys already exist."
+fi
