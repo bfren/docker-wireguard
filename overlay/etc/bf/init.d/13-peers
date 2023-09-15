@@ -40,7 +40,7 @@ for I in ${!PEERS[@]} ; do
 
     # always generate config in case IP range / DNS has changed
     bf-esh \
-        ${BF_TEMPLATES}\peer-config.conf.esh \
-        ${PEER_D}\config
+        ${BF_TEMPLATES}/peer-config.conf.esh \
+        ${PEER_D}/config
 
 done
