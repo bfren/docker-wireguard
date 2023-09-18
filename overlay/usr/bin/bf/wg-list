@@ -17,14 +17,14 @@ if [ ! -s "${WIREGUARD_PEERS_LIST}" ] ; then
     exit 0
 fi
 
-# get list of current clients from wg
+# get list of current clients from wg tools
 if DUMP="$(wg show ${WIREGUARD_INTERFACE} dump)"; then
     DUMP="$(tail -n +2 <<< "${DUMP}")"
 else
-    exit 1
+    bf-error "Unable to get list of clients."
 fi
 
-printf "\e[1mConnected Clients\e[0m\n"
+printf "\e[1mClients\e[0m\n"
 
 {
     # print headings
@@ -32,34 +32,42 @@ printf "\e[1mConnected Clients\e[0m\n"
     printf "\t  \e[4mBytes Received\e[0m  \t  \e[4mBytes Sent\e[0m  "
     printf "\t  \e[4mLast Seen\e[0m\n"
 
-    while IFS= read -r LINE; do
-    if [ -n "${LINE}" ] ; then
-        PUBLIC_KEY="$(awk '{ print $1 }' <<< "${LINE}")"
-        REMOTE_IP="$(awk '{ print $3 }' <<< "${LINE}")"
-        VIRTUAL_IP="$(awk '{ print $4 }' <<< "${LINE}")"
-        BYTES_RECEIVED="$(awk '{ print $6 }' <<< "${LINE}")"
-        BYTES_SENT="$(awk '{ print $7 }' <<< "${LINE}")"
-        LAST_SEEN="$(awk '{ print $5 }' <<< "${LINE}")"
-        CLIENT_NAME="$(grep "${PUBLIC_KEY}" "${WIREGUARD_PEERS_LIST}" \
-            | awk '{ print $1 }')"
-        printf "%s  \t  %s  \t  %s  \t  " \
-            "${CLIENT_NAME}" \
-            "${REMOTE_IP}" \
-            "${VIRTUAL_IP/\/32/}"
+    # print info for each client
+    while IFS= read -r LINE ; do
+        if [ -n "${LINE}" ] ; then
 
-        printf "%s  \t  %s  \t  " \
-            "$(hr "${BYTES_RECEIVED}")" \
-            "$(hr "${BYTES_SENT}")"
+            # get client info
+            PUBLIC_KEY="$(awk '{ print $1 }' <<< "${LINE}")"
+            REMOTE_IP="$(awk '{ print $3 }' <<< "${LINE}")"
+            VIRTUAL_IP="$(awk '{ print $4 }' <<< "${LINE}")"
+            BYTES_RECEIVED="$(awk '{ print $6 }' <<< "${LINE}")"
+            BYTES_SENT="$(awk '{ print $7 }' <<< "${LINE}")"
+            LAST_SEEN="$(awk '{ print $5 }' <<< "${LINE}")"
+            CLIENT_NAME="$(grep "${PUBLIC_KEY}" "${WIREGUARD_PEERS_LIST}" \
+                | awk '{ print $1 }')"
 
-        if [[ "${LAST_SEEN}" -ne 0 ]]; then
-            printf "%s" "$(date -d @"${LAST_SEEN}" '+%b %d %Y - %T')"
-        else
-            printf "(not yet)"
+            # print client info
+            printf "%s  \t  %s  \t  %s  \t  " \
+                "${CLIENT_NAME}" \
+                "${REMOTE_IP}" \
+                "${VIRTUAL_IP/\/32/}"
+
+            printf "%s  \t  %s  \t  " \
+                "$(hr "${BYTES_RECEIVED}")" \
+                "$(hr "${BYTES_SENT}")"
+
+            # print last seen in human readable format
+            if [ "${LAST_SEEN}" -ne 0 ] ; then
+                printf "%s" "$(date -d @"${LAST_SEEN}" '+%b %d %Y - %T')"
+            else
+                printf "(not yet)"
+            fi
+
+            # don't forget the new line...
+            printf "\n"
         fi
-
-        printf "\n"
-    fi
     done <<< "${DUMP}"
 
+    # don't forget the new line...
     printf "\n"
 } | column -ts $'\t'
