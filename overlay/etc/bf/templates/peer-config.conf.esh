@@ -1,11 +1,11 @@
 [Interface]
-Address = <%= ${WIREGUARD_IP_RANGE} %>.<%= ${PEER_NUM} %>/24
-PrivateKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRIVATEKEY_FILE}` %>
+Address = <% bf-env WIREGUARD_IP_RANGE %>.<% bf-env -P NUM %>/24
+PrivateKey = <% bf-env -P PRIVATE_KEY %>
 ListenPort = 51820
-DNS = <%= ${WIREGUARD_DNS} %>
+DNS = <% bf-env WIREGUARD_DNS %>
 
 [Peer]
-PublicKey = <%= `cat ${WIREGUARD_SERVER_PUBLICKEY}` %>
-PresharedKey = <%= `cat ${WIREGUARD_PEERS_D}/${PEER_NAME}/${WIREGUARD_PEER_PRESHAREDKEY_FILE}` %>
-Endpoint = <%= ${WIREGUARD_EXTERNAL_ADDRESS} %>:51820
+PublicKey = <% bf-env -P PUBLIC_KEY %>
+PresharedKey = <% bf-env -P PRESHARED_KEY %>
+Endpoint = <% bf-env WIREGUARD_EXTERNAL_ADDRESS %>:51820
 AllowedIPs = 0.0.0.0/0
