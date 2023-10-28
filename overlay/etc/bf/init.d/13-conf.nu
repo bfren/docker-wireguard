@@ -1,5 +1,5 @@
 use bf
-use bf-wireguard peer
+use bf-wireguard peers
 bf env load
 
 # Generate WireGuard configuration file
@@ -18,11 +18,11 @@ def main [] {
 
     # add each peer to the interface configuration
     let peers_list = bf env WIREGUARD_PEERS | split words
-    for peer in $peers_list --numbered {
+    for peer in (peers list) --numbered {
         # read info for this peer
         let name = $peer.item
-        let num = peer num $peer.index
-        let peer_d = peer dir $name
+        let num = peers num $peer.index
+        let peer_d = peers dir $name
         let public_key = bf fs read $"($peer_d)/(bf env WIREGUARD_PEER_PUBLICKEY_FILE)"
         let preshared_key = bf fs read $"($peer_d)/(bf env WIREGUARD_PEER_PUBLICKEY_FILE)"
 
