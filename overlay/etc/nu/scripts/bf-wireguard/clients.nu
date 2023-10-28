@@ -1,13 +1,9 @@
-#!/usr/bin/nu
-
 use bf
-use bf-wireguard peers
-bf env load -x
+use peers.nu
 
-# Show list of peers - inspired by https://raw.githubusercontent.com/pivpn/pivpn/master/scripts/wireguard/clientSTAT.sh
-def main [] {
+export def main [] {
     # if there are no peers in the list, exit
-    let peers_list = peers list
+    let peers_list = peers get_list
     if ($peers_list | length) == 0 { bf write notok "There are no clients to list." ; exit 0 }
 
     # get list of current clients from wg tools
@@ -27,7 +23,10 @@ def main [] {
         let last_seen = $col.4 | into datetime
         let bytes_received = $col.5 | into filesize
         let bytes_sent = $col.6 | into filesize
-        let name = $peers_list | where public_key == $public_key | first | get name
+        let name = match ($peers_list | where public_key == $public_key) {
+            $x if ($x | length) == 1 => { $x | first | get name }
+            _ => { bf write error $"Unable to find peer with public key ($public_key)." clients }
+        }
 
         # return as a record
         {name: $name, remote_ip: $remote_ip, virtual_ip: $virtual_ip, bytes_received: $bytes_received, bytes_sent: $bytes_sent, last_seen: $last_seen}

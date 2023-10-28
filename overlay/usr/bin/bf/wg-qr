@@ -8,9 +8,5 @@ bf env load -x
 def main [
     name: string    # Peer name
 ] {
-    # get configuration
-    let config = peers get_conf $name
-
-    # convert to QR code and show
-    { ^qrencode -t (bf env WIREGUARD_QR_ENCODING) $config } | bf handle
+    peers get_qr $name
 }

@@ -11,7 +11,7 @@ export def dir [
 }
 
 # Get the list of configured peers
-export def list [] { bf env WIREGUARD_PEERS_LIST | open --raw | from nuon }
+export def get_list [] { bf env WIREGUARD_PEERS_LIST | open --raw | from nuon }
 
 # Increment the array index by 2 to return the final number of a peer's IP address
 export def num [
@@ -30,4 +30,16 @@ export def get_conf [
 
     # read and return file contents
     bf fs read $peer_config_file
+}
+
+# Get a QR code of the configuration for peer $name
+export def get_qr [
+    name: string    # Peer name
+] {
+    # get configuration
+    let encoding = bf env WIREGUARD_QR_ENCODING
+    let config = get_conf $name
+
+    # convert to QR code
+    { ^qrencode -t $encoding $config } | bf handle
 }

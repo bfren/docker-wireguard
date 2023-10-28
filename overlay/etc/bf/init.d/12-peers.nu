@@ -54,7 +54,7 @@ def main [] {
         {name: $name, public_key: $public_key}
     }
 
-    # save peers list
+    # save peers list to file
     bf write $" .. saving list of peers"
     $peers_list | to nuon | save --force (bf env WIREGUARD_PEERS_LIST)
 }

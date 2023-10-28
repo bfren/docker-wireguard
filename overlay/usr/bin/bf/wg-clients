@@ -1,0 +1,8 @@
+#!/usr/bin/nu
+
+use bf
+use bf-wireguard clients
+bf env load -x
+
+# Show list of clients - inspired by https://raw.githubusercontent.com/pivpn/pivpn/master/scripts/wireguard/clientSTAT.sh
+def main [] { clients }
