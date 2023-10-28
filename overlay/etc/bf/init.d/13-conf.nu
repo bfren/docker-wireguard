@@ -27,7 +27,7 @@ def main [] {
 
         # add this peer to the configuration file
         with-env {NAME: $name, NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key} {
-            bf esh $"(bf env ETC_TEMPLATES)/peer-definition.conf.esh" | save --append $"(char newline)($conf)(char newline)"
+            bf esh $"(bf env ETC_TEMPLATES)/peer-definition.conf.esh" | $"(char newline)($in)(char newline)" | save --append $conf
         }
     }
 
