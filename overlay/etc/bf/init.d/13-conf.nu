@@ -18,7 +18,7 @@ def main [] {
 
     # add each peer to the interface configuration
     let peers_list = bf env WIREGUARD_PEERS | split words
-    for peer in (peers list) --numbered {
+    for peer in (peers) --numbered {
         # read info for this peer
         let name = $peer.item
         let num = peers num $peer.index

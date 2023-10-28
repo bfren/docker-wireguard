@@ -10,15 +10,11 @@ def main [] {
     let peers_d = bf env WIREGUARD_PEERS_D
     mkdir $peers_d
 
-    # remove list of peers - it will be remade during the loop
-    let peers_list_file = bf env WIREGUARD_PEERS_LIST
-    rm --force $peers_list_file
-
     # loop using index for calculating the peer IP address
-    for peer in (peers list) --numbered {
+    let peers_list = peers | enumerate | each {|x|
         # get variables for easy access
-        let name = $peer.item
-        let num = peers num $peer.index
+        let name = $x.item
+        let num = peers num $x.index
         bf write $" .. ($name) [($num)]"
 
         # if peer number is greater than 254, exit with an error
@@ -26,7 +22,7 @@ def main [] {
 
         # ensure peer directory exists
         let peer_d = peers dir $name
-        if ($peer_d | bf fs is_not_dir) { mkdir $peer_d }
+        mkdir $peer_d
 
         # if the public and private keys do not exist, create them
         let public_key_file = $"($peer_d)/(bf env WIREGUARD_PEER_PUBLICKEY_FILE)"
@@ -54,7 +50,11 @@ def main [] {
 
         # add peer name to list for showing stats
         let public_key = bf fs read $public_key_file
-        bf write debug "    adding to peers list file"
-        $"($name) ($public_key) ($num)(char newline)" | save --append $peers_list_file
+        bf write debug "    adding to peers list"
+        {name: $name, public_key: $public_key}
     }
+
+    # save peers list
+    bf write $" .. saving list of peers"
+    $peers_list | to nuon | save --force (bf env WIREGUARD_PEERS_LIST)
 }
