@@ -15,7 +15,7 @@ def main [] {
     rm --force $peers_list_file
 
     # convert space-separated string of peers into a list
-    let peers_list = bf env WIREGUARD_PEERS | split list " "
+    let peers_list = bf env WIREGUARD_PEERS | split row " "
 
     # loop using index for calculating the peer IP address
     for peer in $peers_list --numbered {
