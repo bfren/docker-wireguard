@@ -8,7 +8,6 @@ def main [] {
 
     # get values as variables
     let conf = bf env WIREGUARD_CONF
-    let server_public_key = bf fs read (bf env WIREGUARD_SERVER_PUBLICKEY)
     let server_private_key = bf fs read (bf env WIREGUARD_SERVER_PRIVATEKEY)
 
     # generate the interface configuration

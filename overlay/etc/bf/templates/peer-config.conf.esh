@@ -5,7 +5,7 @@ ListenPort = 51820
 DNS = <% bf-env WIREGUARD_DNS %>
 
 [Peer]
-PublicKey = <% bf-env -P PUBLIC_KEY %>
+PublicKey = <% bf-env -P SERVER_PUBLIC_KEY %>
 PresharedKey = <% bf-env -P PRESHARED_KEY %>
 Endpoint = <% bf-env WIREGUARD_EXTERNAL_ADDRESS %>:51820
 AllowedIPs = 0.0.0.0/0

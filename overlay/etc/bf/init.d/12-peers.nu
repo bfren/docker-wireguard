@@ -6,6 +6,9 @@ bf env load
 def main [] {
     bf write "Generating peer keys and configuration."
 
+    # get server public key
+    let server_public_key = bf fs read (bf env WIREGUARD_SERVER_PUBLICKEY)
+
     # ensure peers directory exists
     let peers_d = bf env WIREGUARD_PEERS_D
     mkdir $peers_d
@@ -43,7 +46,7 @@ def main [] {
         let public_key = bf fs read $public_key_file
         let preshared_key = bf fs read $preshared_key_file
         let private_key = bf fs read $private_key_file
-        with-env {NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key, PRIVATE_KEY: $private_key} {
+        with-env {NUM: $num, SERVER_PUBLIC_KEY: $server_public_key, PRESHARED_KEY: $preshared_key, PRIVATE_KEY: $private_key} {
             bf write debug "    configuration file"
             bf esh $"(bf env ETC_TEMPLATES)/peer-config.conf.esh" $"($peer_d)/config"
         }
