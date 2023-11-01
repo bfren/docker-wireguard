@@ -1,12 +1,12 @@
 #!/usr/bin/nu
 
 use bf
-use bf-wireguard peers
+use bf-wireguard
 bf env load -x
 
 # Show QR code of the configuration for peer $name
 def main [
     name: string    # Peer name
 ] {
-    peers get_qr $name
+    bf-wireguard peers get_qr $name
 }

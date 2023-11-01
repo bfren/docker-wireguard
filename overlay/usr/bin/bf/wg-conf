@@ -1,12 +1,12 @@
 #!/usr/bin/nu
 
 use bf
-use bf-wireguard peers
+use bf-wireguard
 bf env load -x
 
 # Get configuration for peer $name
 def main [
     name: string    # Peer name
 ] {
-    peers get_conf $name
+    bf-wireguard peers get_conf $name
 }
