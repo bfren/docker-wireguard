@@ -6,7 +6,7 @@ export def preflight [] {
     bf env load
 
     # manually set executing script
-    bf env set X wireguard/run
+    bf env x_set --override run wireguard
 
     # if we get here we are ready to start WireGuard
     bf write "Starting WireGuard interface."
