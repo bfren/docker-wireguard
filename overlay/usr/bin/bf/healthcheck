@@ -1,12 +1,10 @@
-#!/usr/bin/nu
+#!/bin/sh
 
-use bf
-bf env load -x
+set -euo pipefail
 
-# Check WireGuard is running
-def main [] {
-    # show WireGuard status
-    bf write debug $"Checking WireGuard is listening on the correct port."
-    let listening = $"listening port: 51820"
-    { ^wg show | grep $listening } | bf handle -c | exit $in
-}
+
+#======================================================================================================================
+# Check WireGuard is running on the correct port
+#======================================================================================================================
+
+wg show | grep "listening port: 51820"
