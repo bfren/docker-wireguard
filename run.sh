@@ -4,6 +4,7 @@ IMAGE=`cat VERSION`
 
 CONFIG=$PWD/config
 rm -rf ${CONFIG}
+mkdir ${CONFIG}
 
 docker buildx build \
     --load \
