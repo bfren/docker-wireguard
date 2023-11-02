@@ -17,7 +17,7 @@ export def get_list [] { bf env WIREGUARD_PEERS_LIST | open --raw | from nuon }
 export def num [
     index: int  # Array index of the current peer
 ] {
-    $index + (bf env WIREGUARD_IP_START_PEERS_AT)
+    $index + (bf env WIREGUARD_IP_START_PEERS_AT | into int)
 }
 
 # Return a peer's configuration settings
