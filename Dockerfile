@@ -15,9 +15,9 @@ ENV \
     # the name of the WireGuard interface
     BF_WIREGUARD_INTERFACE=wg0 \
     # the IP range of the WireGuard interface (do NOT include the final number)
-    BF_WIREGUARD_IP_RANGE=192.168.100 \
+    BF_WIREGUARD_IP_RANGE=187.0.0 \
     # the final number of the IP address to start at (will be added to BF_WIREGUARD_IP_RANGE)
-    BF_WIREGUARD_IP_START_AT=10 \
+    BF_WIREGUARD_IP_START_PEERS_AT=2 \
     # space-separated list of WireGuard peers - these will be created automatically
     BF_WIREGUARD_PEERS=
 
