@@ -24,4 +24,7 @@ def main [] {
         libqrencode
         util-linux
     ]
+
+    # add bf-wireguard module to config
+    bf config use bf-wireguard
 }
