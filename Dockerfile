@@ -7,6 +7,8 @@ ARG BF_VERSION
 
 EXPOSE 51820/udp
 
+COPY ./overlay /
+
 ENV \
     # the IP address or name of the DNS resolver
     BF_WIREGUARD_DNS=1.1.1.1 \
@@ -20,8 +22,6 @@ ENV \
     BF_WIREGUARD_IP_START_PEERS_AT=2 \
     # space-separated list of WireGuard peers - these will be created automatically
     BF_WIREGUARD_PEERS=
-
-COPY ./overlay /
 
 RUN bf-install
 
