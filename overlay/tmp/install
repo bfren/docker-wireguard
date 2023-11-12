@@ -9,7 +9,7 @@ def main [] {
 
     # get WireGuard version and install
     cd /tmp
-    let version = bf fs read ./WIREGUARD_BUILD
+    let version = bf fs read WIREGUARD_BUILD
     bf write $"Installing WireGuard v($version)."
     bf pkg install [$"wireguard-tools=($version)"]
 
