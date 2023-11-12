@@ -1,6 +1,7 @@
 use bf
 use peers.nu
 
+# Get all connected clients
 export def main [] {
     # if there are no peers in the list, exit
     let peers_list = peers get_list
