@@ -1,4 +1,4 @@
-FROM bfren/alpine-s6:alpine3.18-4.5.9
+FROM bfren/alpine-s6:alpine3.18-5.0.0
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-wireguard"
 
@@ -7,19 +7,21 @@ ARG BF_VERSION
 
 EXPOSE 51820/udp
 
-ENV \
-    # the IP address or name of the host server
-    WIREGUARD_EXTERNAL_ADDRESS= \
-    # the name of the WireGuard interface
-    WIREGUARD_INTERFACE=wg0 \
-    # the IP range of the WireGuard interface (do NOT include the final number)
-    WIREGUARD_IP_RANGE=192.168.100 \
-    # the IP address or name of the DNS resolver
-    WIREGUARD_DNS=1.1.1.1 \
-    # space-separated list of WireGuard peers - these will be created automatically
-    WIREGUARD_PEERS=
-
 COPY ./overlay /
+
+ENV \
+    # the IP address or name of the DNS resolver
+    BF_WIREGUARD_DNS=1.1.1.1 \
+    # the IP address or name of the host server
+    BF_WIREGUARD_EXTERNAL_ADDRESS= \
+    # the name of the WireGuard interface
+    BF_WIREGUARD_INTERFACE=wg0 \
+    # the IP range of the WireGuard interface (do NOT include the final number)
+    BF_WIREGUARD_IP_RANGE=187.0.0 \
+    # the final number of the IP address to start at (will be added to BF_WIREGUARD_IP_RANGE)
+    BF_WIREGUARD_IP_START_PEERS_AT=2 \
+    # space-separated list of WireGuard peers - these will be created automatically
+    BF_WIREGUARD_PEERS=
 
 RUN bf-install
 

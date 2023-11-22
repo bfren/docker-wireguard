@@ -1,22 +1,12 @@
-#!/command/with-contenv bash
+#!/usr/bin/nu
 
-set -euo pipefail
-export BF_E=`basename ${0}`
+use bf
+use bf-wireguard
+bf env load -x
 
-
-#======================================================================================================================
-# Check variables.
-#======================================================================================================================
-
-[[ -z "${1-}" ]] && bf-error "You must pass a peer." "wg-qr"
-PEER="${1}"
-
-
-#======================================================================================================================
-# Show this user's config as a QR code.
-#======================================================================================================================
-
-CONFIG=${WIREGUARD_PEERS_D}/${PEER}/config
-[[ -f ${CONFIG} ]] || bf-error "Configuration file for ${PEER} does not exist." "wg-qr"
-
-qrencode -t "${WIREGUARD_QR_ENCODING}" < ${CONFIG}
+# Show QR code of the configuration for peer $name
+def main [
+    name: string    # Peer name
+] {
+    bf-wireguard peers get_qr $name
+}

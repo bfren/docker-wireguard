@@ -1,36 +1,30 @@
-#!/bin/sh
+#!/usr/bin/nu
 
-set -euo pipefail
-export BF_E=`basename ${0}`
+use bf
 
+# Setup and install WireGuard
+def main [] {
+    # add unbound user
+    bf user add unbound
 
-#======================================================================================================================
-# Get WireGuard version.
-#======================================================================================================================
+    # get WireGuard version and install
+    cd /tmp
+    let version = bf fs read WIREGUARD_BUILD
+    bf write $"Installing WireGuard v($version)."
+    bf pkg install [$"wireguard-tools=($version)"]
 
-cd /tmp
+    # save WireGuard version to build log
+    bf build add WireGuard $version
 
-VERSION=$(cat WIREGUARD_BUILD)
-bf-echo "WireGuard version ${VERSION}."
+    # install additional packages
+    bf write "Installing additional packages."
+    bf pkg install [
+        coreutils
+        iptables
+        libqrencode
+        util-linux
+    ]
 
-
-#======================================================================================================================
-# Install WireGuard and dependencies.
-#======================================================================================================================
-
-bf-echo "Installing WireGuard v${VERSION}..."
-apk add --no-cache \
-    bash \
-    coreutils \
-    iptables \
-    libqrencode \
-    util-linux \
-    wireguard-tools=${VERSION}
-bf-done
-
-
-#======================================================================================================================
-# Cleanup.
-#======================================================================================================================
-
-bf-done
+    # add bf-wireguard module to config
+    bf config use bf-wireguard
+}

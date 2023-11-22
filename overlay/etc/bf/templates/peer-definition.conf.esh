@@ -1,0 +1,6 @@
+### <% bf-env -P NAME %> ###
+[Peer]
+PublicKey = <% bf-env -P PUBLIC_KEY %>
+PresharedKey = <% bf-env -P PRESHARED_KEY %>
+AllowedIPs = <% bf-env WIREGUARD_IP_RANGE %>.<% bf-env -P NUM %>/32
+### /<% bf-env -P NAME %> ###

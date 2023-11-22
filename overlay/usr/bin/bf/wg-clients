@@ -1,0 +1,8 @@
+#!/usr/bin/nu
+
+use bf
+use bf-wireguard
+bf env load -x
+
+# Show all connected clients
+def main [] { bf-wireguard clients }

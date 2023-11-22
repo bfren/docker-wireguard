@@ -1,11 +1,10 @@
-#!/command/with-contenv bash
+#!/bin/sh
 
 set -euo pipefail
-export BF_E=`basename ${0}`
 
 
 #======================================================================================================================
-# Check WireGuard is running.
+# Check WireGuard is running on the correct port
 #======================================================================================================================
 
-wg show | grep "listening" > /dev/null 2>&1 || exit 1
+wg show | grep "listening port: 51820"
