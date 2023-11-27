@@ -41,5 +41,5 @@ export def get_qr [
     let config = get_conf $name
 
     # convert to QR code
-    { ^qrencode -t $encoding $config } | bf handle
+    { ^qrencode -t $encoding $config } | bf handle peers/get_qr
 }

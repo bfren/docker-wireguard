@@ -8,7 +8,7 @@ export def main [] {
     if ($peers_list | length) == 0 { bf write notok "There are no clients to list." ; exit 0 }
 
     # get list of current clients from wg tools
-    let clients_list = { ^wg show (bf env WIREGUARD_INTERFACE) dump } | bf handle -i | lines
+    let clients_list = { ^wg show (bf env WIREGUARD_INTERFACE) dump } | bf handle -i clients | lines
     if ($clients_list | length) == 0 { bf write error "Unable to get the list of clients." }
 
     # convert each line into a record
