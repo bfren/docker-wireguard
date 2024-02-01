@@ -21,7 +21,7 @@ def main [] {
     bf pkg install [
         coreutils
         iptables
-        libqrencode
+        libqrencode-tools
         util-linux
     ]
 
