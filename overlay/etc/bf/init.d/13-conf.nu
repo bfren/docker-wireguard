@@ -11,7 +11,7 @@ def main [] {
     let server_private_key = bf fs read (bf env WIREGUARD_SERVER_PRIVATEKEY)
 
     # generate the interface configuration
-    with-env {SERVER_PRIVATE_KEY: $server_private_key} {
+    with-env { SERVER_PRIVATE_KEY: $server_private_key } {
         bf esh $"(bf env ETC_TEMPLATES)/interface.conf.esh" $conf
     }
 
@@ -26,7 +26,7 @@ def main [] {
         let preshared_key = bf fs read $"($peer_d)/(bf env WIREGUARD_PEER_PRESHAREDKEY_FILE)"
 
         # add this peer to the configuration file
-        with-env {NAME: $name, NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key} {
+        with-env { NAME: $name, NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key } {
             bf esh $"(bf env ETC_TEMPLATES)/peer-definition.conf.esh" | $"(char newline)($in)(char newline)" | save --append $conf
         }
     }
