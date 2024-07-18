@@ -8,7 +8,7 @@ use write.nu
 export def main [
     input: string   # Input file
     output?: string # Output file - if omitted the output will be returned instead of saved
-]: nothing -> nothing {
+]: nothing -> string {
     # debug message
     write debug $"Parsing esh template ($input)." esh
 
@@ -28,12 +28,11 @@ export def main [
     #   and: return value if $output is not set
     #   or:  save to file if $output is set
     if ($output | is-empty) {
-        { ^esh $input } | handle -D -f $on_failure esh
+        return { ^esh $input } | handle -f $on_failure esh
     } else {
-        { ^esh -o $output $input } | handle -D -f $on_failure -s $on_success esh
+        { ^esh -o $output $input } | handle -f $on_failure -s $on_success esh
+        return $output
     }
-
-    return
 }
 
 # It is common to generate a file using an esh template in the bf templates directory, so this makes that easier
