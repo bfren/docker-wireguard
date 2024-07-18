@@ -28,7 +28,13 @@ def main [] {
         let preshared_key = bf fs read $"($peer_d)/(bf env WIREGUARD_PEER_PRESHAREDKEY_FILE)"
 
         # add this peer to the configuration file
+        bf write debug "    adding peer definition to configuration file"
         with-env { NAME: $name, NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key } {
+            bf write debug $"name:($env.NAME)"
+            bf write debug $"num:($env.NUM)"
+            bf write debug $"public key:($env.PUBLIC_KEY)"
+            bf write debug $"preshared key:($env.PRESHARED_KEY)"
+            bf write debug $"conf:($conf)"
             bf esh $"(bf env ETC_TEMPLATES)/peer-definition.conf.esh" | $"(char newline)($in)(char newline)" | save --append $conf
         }
     }
