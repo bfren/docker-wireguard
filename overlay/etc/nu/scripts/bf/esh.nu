@@ -26,7 +26,7 @@ export def main [
 
     # generate template
     #   and: return value if $output is not set
-    #   or:  save to file if $output is set
+    #   or:  save to file if $output is set and return filename
     if ($output | is-empty) {
         return { ^esh $input } | handle -f $on_failure esh
     } else {
@@ -40,7 +40,7 @@ export def main [
 # - and that the $output directory exists
 export def template [
     output: string  # Absolute path to the output file
-]: nothing -> nothing {
+]: nothing -> string {
     # get filenames and paths
     let filename = $output | path basename
     let output_dir = $output | path dirname
