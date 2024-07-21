@@ -14,4 +14,6 @@ nu -c "use bf-wireguard run ; run preflight"
 # Start WireGuard interface
 #======================================================================================================================
 
+env
+
 wg-quick up ${BF_WIREGUARD_CONF}
