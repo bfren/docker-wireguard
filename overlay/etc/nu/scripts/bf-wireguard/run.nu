@@ -1,7 +1,7 @@
 use bf
 
 # Run preflight checks before executing process
-export def preflight [] {
+export def preflight []: nothing -> nothing {
     # load environment
     bf env load
 
