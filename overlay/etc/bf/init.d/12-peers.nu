@@ -17,14 +17,14 @@ def main [] {
     let peers_list = peers | enumerate | each {|x|
         # get variables for easy access
         let name = $x.item
-        let num = peers num $x.index
+        let num = $x.index | peers increment
         bf write $" .. ($name) [($num)]"
 
         # if peer number is greater than 254, exit with an error
         if $num >= 254 { bf write error "You have requested too many peers." }
 
         # ensure peer directory exists
-        let peer_d = peers dir $name
+        let peer_d = $name | peers get_dir
         mkdir $peer_d
 
         # if the public and private keys do not exist, create them
@@ -54,7 +54,7 @@ def main [] {
         # add peer name to list for showing stats
         let public_key = bf fs read $public_key_file
         bf write debug "    adding to peers list"
-        {name: $name, public_key: $public_key}
+        { name: $name, public_key: $public_key }
     }
 
     # save peers list to file

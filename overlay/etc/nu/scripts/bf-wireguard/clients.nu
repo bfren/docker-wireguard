@@ -2,7 +2,7 @@ use bf
 use peers.nu
 
 # Get all connected clients
-export def main [] {
+export def main []: nothing -> list<record> {
     # if there are no peers in the list, exit
     let peers_list = peers get_list
     if ($peers_list | length) == 0 { bf write notok "There are no clients to list." ; exit 0 }

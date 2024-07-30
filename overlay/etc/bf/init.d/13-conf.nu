@@ -20,9 +20,9 @@ def main [] {
     peers | enumerate | each {|x|
         # read info for this peer
         let name = $x.item
-        let num = peers num $x.index
+        let num = $x.index | peers increment
 
-        let peer_d = peers dir $name
+        let peer_d = $name | peers get_dir
         let public_key = bf fs read $"($peer_d)/(bf env WIREGUARD_PEER_PUBLICKEY_FILE)"
         let preshared_key = bf fs read $"($peer_d)/(bf env WIREGUARD_PEER_PRESHAREDKEY_FILE)"
 
