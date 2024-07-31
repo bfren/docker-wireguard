@@ -31,3 +31,25 @@ export def main []: nothing -> list<record> {
         }
     }
 }
+
+# Show the list of peers with public keys replaced by peer names
+def show []: nothing -> nothing {
+    # get the output from wg executable
+    let output = { ^wg show } | bf handle -i peers/show
+    if ($output | is-empty) { bf write error "WireGuard interface not detected." }
+
+    # replace public keys with peer names
+    let result = get_list | reduce --fold $output {|peer, acc|
+        $acc | str replace $peer.public_key $peer.name
+    }
+
+    # display result
+    $result | print
+}
+
+# Show the list of peers and refresh every
+export def watch [
+    refresh: duration = 2sec    # Refresh the list by this duration
+]: nothing -> nothing {
+    loop { clear ; show ; sleep $refresh }
+}
