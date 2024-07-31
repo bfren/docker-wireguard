@@ -6,5 +6,5 @@ DNS = <% bf-env WIREGUARD_DNS %>
 [Peer]
 PublicKey = <% bf-env -P SERVER_PUBLIC_KEY %>
 PresharedKey = <% bf-env -P PRESHARED_KEY %>
-AllowedIPs = 0.0.0.0/0
+AllowedIPs = 0.0.0.0/0, ::/0
 Endpoint = <% bf-env WIREGUARD_EXTERNAL_ADDRESS %>:51820
