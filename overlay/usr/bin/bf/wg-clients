@@ -4,5 +4,5 @@ use bf
 use bf-wireguard
 bf env load -x
 
-# Show all connected clients
+# Show all configured clients
 def main [] { bf-wireguard clients }

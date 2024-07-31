@@ -9,14 +9,17 @@ Comes with [WireGuard](https://www.wireguard.com/) pre-installed.
 Once started you can show configuration for a peer in two ways:
 
 ```bash
-# show configuration as text
+# print configuration as text
 wg-conf peer1
 
-# show configuration as QR code
+# print configuration as QR code
 wg-qr peer1
 
-# show all registered clients
+# print all registered clients with connection statistics
 wg-clients
+
+# show all clients, auto refreshing every 2sec (similar to wg show)
+wg-show
 ```
 
 ## Contents
@@ -53,6 +56,7 @@ wg-clients
 | ------------- | ------------- | ------------------------------------------------- |
 | `wg-clients`  | *none*        | Displays all configured clients with statistics.  |
 | `wg-conf`     | 0: Peer name  | Display a peer's configuration as text.           |
+| `wg-show`     | *none*        | Displays output from `wg show` with client names. |
 | `wg-qr`       | 0: Peer name  | Display a peer's configuration as a QR code.      |
 
 ## Licence
