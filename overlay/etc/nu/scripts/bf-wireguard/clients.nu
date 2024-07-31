@@ -39,7 +39,7 @@ def show []: nothing -> nothing {
     if ($output | is-empty) { bf write error "WireGuard interface not detected." }
 
     # replace public keys with peer names
-    let result = get_list | reduce --fold $output {|peer, acc|
+    let result = peers get_list | reduce --fold $output {|peer, acc|
         $acc | str replace $peer.public_key $peer.name
     }
 
