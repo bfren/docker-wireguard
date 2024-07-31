@@ -15,7 +15,7 @@ wg-conf peer1
 # show configuration as QR code
 wg-qr peer1
 
-# show all clients
+# show all registered clients
 wg-clients
 ```
 
