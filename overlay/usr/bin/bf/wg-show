@@ -1,0 +1,8 @@
+#!/usr/bin/nu
+
+use bf
+use bf-wireguard
+bf env load -x
+
+# Show all connected peers
+def main [] { bf-wireguard clients watch }
