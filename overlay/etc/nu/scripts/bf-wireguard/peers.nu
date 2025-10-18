@@ -34,5 +34,4 @@ export def get_qr [
 
     # convert to QR code
     { ^qrencode -t $encoding $config } | bf handle peers/get_qr
-    return
 }
