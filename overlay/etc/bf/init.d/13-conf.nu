@@ -10,7 +10,7 @@ def main [] {
 
     # generate the interface configuration
     bf write "Generating WireGuard configuration file."
-    with-env { SERVER_PRIVATE_KEY: $server_private_key } {
+    with-env {SERVER_PRIVATE_KEY: $server_private_key} {
         bf esh $"(bf env ETC_TEMPLATES)/interface.conf.esh" $conf
     }
 
@@ -29,7 +29,7 @@ def main [] {
         # add this peer to the configuration file
         bf write $" .. ($name) [($num)]"
         bf write debug "    adding peer definition to configuration file"
-        with-env { NAME: $name, NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key } {
+        with-env {NAME: $name, NUM: $num, PUBLIC_KEY: $public_key, PRESHARED_KEY: $preshared_key} {
             bf esh $"(bf env ETC_TEMPLATES)/peer-definition.conf.esh" | $"(char newline)($in)(char newline)" | save --append $conf
         }
     }
