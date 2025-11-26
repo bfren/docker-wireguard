@@ -46,7 +46,7 @@ def main [] {
         let public_key = bf fs read $public_key_file
         let preshared_key = bf fs read $preshared_key_file
         let private_key = bf fs read $private_key_file
-        with-env { NUM: $num, SERVER_PUBLIC_KEY: $server_public_key, PRESHARED_KEY: $preshared_key, PRIVATE_KEY: $private_key } {
+        with-env {NUM: $num, SERVER_PUBLIC_KEY: $server_public_key, PRESHARED_KEY: $preshared_key, PRIVATE_KEY: $private_key} {
             bf write debug "    configuration file"
             bf esh $"(bf env ETC_TEMPLATES)/peer-config.conf.esh" $"($peer_d)/config"
         }
