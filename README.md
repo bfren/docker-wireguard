@@ -65,4 +65,4 @@ wg-show
 
 ## Copyright
 
-> Copyright (c) 2023-2025 [bfren](https://bfren.dev) (unless otherwise stated)
+> Copyright (c) 2023-2026 [bfren](https://bfren.dev) (unless otherwise stated)
