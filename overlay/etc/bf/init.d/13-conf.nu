@@ -1,5 +1,5 @@
 use bf
-use bf-wireguard peers
+use bf-wireguard [peers "peers increment" "peers get_dir"]
 bf env load
 
 # Generate WireGuard configuration file

@@ -1,5 +1,5 @@
 use bf
-use bf-wireguard peers
+use bf-wireguard
 bf env load
 
 # Generate WireGuard peers keys and configuration
@@ -17,14 +17,14 @@ def main [] {
     let peers_list = peers | enumerate | each {|x|
         # get variables for easy access
         let name = $x.item
-        let num = $x.index | peers increment
+        let num = $x.index | bf-wireguard peers increment
         bf write $" .. ($name) [($num)]"
 
         # if peer number is greater than 254, exit with an error
         if $num >= 254 { bf write error "You have requested too many peers." }
 
         # ensure peer directory exists
-        let peer_d = $name | peers get_dir
+        let peer_d = $name | bf-wireguard peers get_dir
         mkdir $peer_d
 
         # if the public and private keys do not exist, create them

@@ -1,3 +1,2 @@
-export module clients.nu
-export module peers.nu
-export module run.nu
+export use clients.nu
+export use peers.nu
