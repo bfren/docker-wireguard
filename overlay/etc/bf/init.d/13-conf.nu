@@ -1,5 +1,5 @@
 use bf
-use bf-wireguard [peers "peers increment" "peers get_dir"]
+use bf-wireguard [peers]
 bf env load
 
 # Generate WireGuard configuration file
@@ -17,7 +17,7 @@ def main [] {
     # add each peer to the interface configuration
     bf write "Adding peers."
     let peers_list = bf env WIREGUARD_PEERS | split words
-    peers | enumerate | each {|x|
+    peers list | enumerate | each {|x|
         # read info for this peer
         let name = $x.item
         let num = $x.index | peers increment
