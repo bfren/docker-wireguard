@@ -128,7 +128,7 @@ Run these with `docker exec <container> <command>` (add `-it` for `wg-show`).
 ## Testing
 
 ```sh
-./test.sh                        # builds the image and runs /test
+./test.nu                        # builds the image and runs /test
 ./run.sh 51820 vpn.example.com   # builds the image and opens a shell, with test peers and ./config mounted
 ```
 
