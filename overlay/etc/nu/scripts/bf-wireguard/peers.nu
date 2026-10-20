@@ -1,7 +1,7 @@
 use bf
 
-# Get the list of peer names that need to be configured
-export def list []: nothing -> list<string> { bf env WIREGUARD_PEERS | split row -r '\s+' }
+# Get the list of peer names that need to be configured - empty if BF_WIREGUARD_PEERS is not set
+export def list []: nothing -> list<string> { bf env --safe WIREGUARD_PEERS | split row -r '\s+' | where {|x| $x != "" } }
 
 # Get the path to the peer's config directory
 export def get_dir []: string -> string { $"(bf env WIREGUARD_PEERS_D)/($in)" }
