@@ -4,9 +4,6 @@ use bf
 
 # Setup and install WireGuard
 def main [] {
-    # add unbound user
-    bf user add unbound
-
     # get WireGuard version and install
     cd /tmp
     let version = bf fs read WIREGUARD_BUILD

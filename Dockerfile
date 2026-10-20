@@ -1,4 +1,4 @@
-FROM quay.io/bfren/alpine-s6:alpine3.24-6.5.0
+FROM quay.io/bfren/alpine-s6:alpine3.24-6.6.0
 
 LABEL org.opencontainers.image.source="https://github.com/bfren/docker-wireguard"
 
@@ -18,7 +18,7 @@ ENV \
     # the name of the WireGuard interface
     BF_WIREGUARD_INTERFACE=wg0 \
     # the IP range of the WireGuard interface (do NOT include the final number)
-    BF_WIREGUARD_IP_RANGE=187.0.0 \
+    BF_WIREGUARD_IP_RANGE=10.187.0 \
     # the final number of the IP address to start at (will be added to BF_WIREGUARD_IP_RANGE)
     BF_WIREGUARD_IP_START_PEERS_AT=2 \
     # space-separated list of WireGuard peers - these will be created automatically

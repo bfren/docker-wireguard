@@ -11,9 +11,17 @@ export def main []: nothing -> list<record> {
     let clients_list = { ^wg show (bf env WIREGUARD_INTERFACE) dump } | bf handle -i clients | lines
     if ($clients_list | length) == 0 { bf write error "Unable to get the list of clients." }
 
-    # convert each line into a record
-    # skip the first one which is the server instance, not a client
-    $clients_list | skip 1 | each {|x|
+    # skip the first line, which is the server instance, not a client
+    $clients_list | skip 1 | parse_dump $peers_list
+}
+
+# Convert peer lines from 'wg show <interface> dump' into records, using $peers_list to find each peer's name
+# each line has: public key, preshared key, endpoint, allowed IPs, latest handshake, bytes received, bytes sent, and
+# persistent keepalive - separated by tabs
+export def parse_dump [
+    peers_list: list<record>    # Configured peers, each with a name and public_key
+]: list<string> -> list<record> {
+    each {|x|
         # split by spaces
         let col = $x | split row -r '\s+'
 
@@ -23,7 +31,7 @@ export def main []: nothing -> list<record> {
                 $x if ($x | length) == 1 => { $x | first | get name }
                 _ => { bf write error $"Unable to find peer with public key ($col.0)." clients }
             }),
-            remote_ip: ($col.2 | str replace ":51820" ""),
+            remote_ip: ($col.2 | str replace --regex ':\d+$' ""),
             virtual_ip: ($col.3 | str replace "/32" ""),
             bytes_received: ($col.5 | into filesize),
             bytes_sent: ($col.6 | into filesize),

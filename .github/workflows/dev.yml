@@ -27,6 +27,36 @@ jobs:
           file: ./VERSION
         id: version
       -
+        name: Read WireGuard version - major
+        uses: bfren/read-file@v2
+        with:
+          file: ./overlay/tmp/WIREGUARD_MAJOR
+        id: wireguard_major
+      -
+        name: Read WireGuard version - minor
+        uses: bfren/read-file@v2
+        with:
+          file: ./overlay/tmp/WIREGUARD_MINOR
+        id: wireguard_minor
+      -
+        name: Read WireGuard version - revision
+        uses: bfren/read-file@v2
+        with:
+          file: ./overlay/tmp/WIREGUARD_REVISION
+        id: wireguard_revision
+      -
+        name: Read image version
+        uses: bfren/read-file@v2
+        with:
+          file: ./VERSION_MAJOR
+        id: version_major
+      -
+        name: Read image version
+        uses: bfren/read-file@v2
+        with:
+          file: ./VERSION_MINOR
+        id: version_minor
+      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v4
       -
@@ -72,9 +102,23 @@ jobs:
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           tags: |
             bfren/wireguard:dev
+            bfren/wireguard:${{ steps.version_major.outputs.contents }}-dev
+            bfren/wireguard:${{ steps.version_minor.outputs.contents }}-dev
             bfren/wireguard:${{ steps.version.outputs.contents }}-dev
+            bfren/wireguard:wireguard${{ steps.wireguard_major.outputs.contents }}-dev
+            bfren/wireguard:wireguard${{ steps.wireguard_major.outputs.contents }}-${{ steps.version.outputs.contents }}-dev
+            bfren/wireguard:wireguard${{ steps.wireguard_minor.outputs.contents }}-dev
+            bfren/wireguard:wireguard${{ steps.wireguard_minor.outputs.contents }}-${{ steps.version.outputs.contents }}-dev
+            bfren/wireguard:wireguard${{ steps.wireguard_revision.outputs.contents }}-dev
             quay.io/bfren/wireguard:dev
+            quay.io/bfren/wireguard:${{ steps.version_major.outputs.contents }}-dev
+            quay.io/bfren/wireguard:${{ steps.version_minor.outputs.contents }}-dev
             quay.io/bfren/wireguard:${{ steps.version.outputs.contents }}-dev
+            quay.io/bfren/wireguard:wireguard${{ steps.wireguard_major.outputs.contents }}-dev
+            quay.io/bfren/wireguard:wireguard${{ steps.wireguard_major.outputs.contents }}-${{ steps.version.outputs.contents }}-dev
+            quay.io/bfren/wireguard:wireguard${{ steps.wireguard_minor.outputs.contents }}-dev
+            quay.io/bfren/wireguard:wireguard${{ steps.wireguard_minor.outputs.contents }}-${{ steps.version.outputs.contents }}-dev
+            quay.io/bfren/wireguard:wireguard${{ steps.wireguard_revision.outputs.contents }}-dev
       -
         name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}

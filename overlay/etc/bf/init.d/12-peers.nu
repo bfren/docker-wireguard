@@ -39,7 +39,7 @@ def main [] {
         let preshared_key_file = $"($peer_d)/(bf env WIREGUARD_PEER_PRESHAREDKEY_FILE)"
         if ($preshared_key_file | bf fs is_not_file) {
             bf write debug "    preshared key"
-            { ^sh -c $"wg genpsk | tee ($preshared_key_file) &> /dev/null" } | bf handle
+            { ^sh -c $"wg genpsk > ($preshared_key_file)" } | bf handle
         }
 
         # always generate config in case IP range / DNS has changed
