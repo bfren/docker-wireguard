@@ -26,6 +26,7 @@ export def install__tools_are_installed [] {
 
 export def scripts__parse [] {
     let paths = [
+        "/etc/bf/health.d/10-wireguard.nu"
         "/usr/bin/bf/wg-clients"
         "/usr/bin/bf/wg-conf"
         "/usr/bin/bf/wg-qr"
