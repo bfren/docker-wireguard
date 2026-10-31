@@ -15,7 +15,7 @@ It is built on [Alpine + S6](https://github.com/bfren/docker-alpine-s6), with `w
 ```yaml
 services:
   wireguard:
-    image: quay.io/bfren/wireguard:4.0
+    image: quay.io/bfren/wireguard:5.0
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -54,9 +54,9 @@ Images are published to Docker Hub (`bfren/wireguard`) and Quay.io (`quay.io/bfr
 | Tag                          | Example                 | Use when                                    |
 | ---------------------------- | ----------------------- | ------------------------------------------- |
 | `latest`                     |                         | You always want the newest image            |
-| `MAJOR`                      | `4`                     | You want updates, but not breaking changes  |
-| `MINOR`                      | `4.0`                   | You want fixes only - **recommended**       |
-| `VERSION`                    | `4.0.0`                 | You want to pin this image exactly          |
+| `MAJOR`                      | `5`                     | You want updates, but not breaking changes  |
+| `MINOR`                      | `5.0`                   | You want fixes only - **recommended**       |
+| `VERSION`                    | `5.0.0`                 | You want to pin this image exactly          |
 | `wireguardX`, `wireguardX.Y` | `wireguard1.0`          | You want a `wireguard-tools` version        |
 | `wireguardX.Y.Z`             | `wireguard1.0.20260223` | You want an exact `wireguard-tools` release |
 
