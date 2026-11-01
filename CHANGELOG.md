@@ -15,4 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Images are built and published by the shared `bfren/docker` build workflow (`build.yml`), replacing the separate
   `dev.yml` and `publish.yml` workflows.
 
+### Security
+
+- Peer keys and configurations in `/config/peers.d` can only be read by root. They were readable by everyone, so any
+  user on the host could read a peer's private key from the bind mount. Existing files are fixed on the next start.
+
 [5.0.0]: https://github.com/bfren/docker-wireguard/compare/v4.0.4...v5.0.0

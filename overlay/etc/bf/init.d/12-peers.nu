@@ -32,14 +32,14 @@ def main [] {
         let private_key_file = $"($peer_d)/(bf env WIREGUARD_PEER_PRIVATEKEY_FILE)"
         if ($public_key_file | bf fs is_not_file) or ($private_key_file | bf fs is_not_file) {
             bf write debug "    public and private keys"
-            { ^sh -c $"wg genkey | tee ($private_key_file) | wg pubkey > ($public_key_file)" } | bf handle
+            { ^sh -c $"umask 077 ; wg genkey | tee ($private_key_file) | wg pubkey > ($public_key_file)" } | bf handle
         }
 
         # if the preshared key does not exist, create it
         let preshared_key_file = $"($peer_d)/(bf env WIREGUARD_PEER_PRESHAREDKEY_FILE)"
         if ($preshared_key_file | bf fs is_not_file) {
             bf write debug "    preshared key"
-            { ^sh -c $"wg genpsk > ($preshared_key_file)" } | bf handle
+            { ^sh -c $"umask 077 ; wg genpsk > ($preshared_key_file)" } | bf handle
         }
 
         # always generate config in case IP range / DNS has changed
@@ -60,4 +60,8 @@ def main [] {
     # save peers list to file
     bf write $" .. saving list of peers"
     $peers_list | to nuon | save --force (bf env WIREGUARD_PEERS_LIST)
+
+    # keys and configurations (which contain the private key) are for root only - this also fixes files created by
+    # earlier versions, which anyone could read
+    bf ch --type f --mode 0600 $peers_d
 }
