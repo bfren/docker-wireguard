@@ -20,8 +20,8 @@ def main [] {
         let num = $x.index | peers increment
         bf write $" .. ($name) [($num)]"
 
-        # if peer number is greater than 254, exit with an error
-        if $num >= 254 { bf write error "You have requested too many peers." }
+        # if peer number is greater than 254, exit with an error (.254 is the last host address in the /24)
+        if $num > 254 { bf write error "You have requested too many peers." }
 
         # ensure peer directory exists
         let peer_d = $name | peers get_dir
