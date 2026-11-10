@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.0.2] - 2026-11-10
+
+### Changed
+
+- Base image updated to `bfren/alpine-s6` 7.0.2, which updates Nushell to 0.117.0 (your own Nushell scripts may
+  need changes), keeps the container starting when `BF_TZ` cannot be set, and no longer hides `CURRENT_FILE` and
+  `FILE_PWD` from services - see the
+  [Alpine + S6 changelog](https://github.com/bfren/docker-alpine-s6/blob/main/CHANGELOG.md).
+
+### Fixed
+
+- A peer can now be given `.254`, the last host address in the /24 - one more peer fits than before (253 with the
+  default `BF_WIREGUARD_IP_START_PEERS_AT` of `2`).
+
 ## [5.0.1] - 2026-11-06
 
 ### Changed
@@ -28,5 +42,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Peer keys and configurations in `/config/peers.d` can only be read by root. They were readable by everyone, so any
   user on the host could read a peer's private key from the bind mount. Existing files are fixed on the next start.
 
+[5.0.2]: https://github.com/bfren/docker-wireguard/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/bfren/docker-wireguard/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/bfren/docker-wireguard/compare/v4.0.4...v5.0.0

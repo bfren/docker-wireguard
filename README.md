@@ -56,7 +56,7 @@ Images are published to Docker Hub (`bfren/wireguard`) and Quay.io (`quay.io/bfr
 | `latest`                     |                         | You always want the newest image            |
 | `MAJOR`                      | `5`                     | You want updates, but not breaking changes  |
 | `MINOR`                      | `5.0`                   | You want fixes only - **recommended**       |
-| `VERSION`                    | `5.0.1`                 | You want to pin this image exactly          |
+| `VERSION`                    | `5.0.2`                 | You want to pin this image exactly          |
 | `wireguardX`, `wireguardX.Y` | `wireguard1.0`          | You want a `wireguard-tools` version        |
 | `wireguardX.Y.Z`             | `wireguard1.0.20260223` | You want an exact `wireguard-tools` release |
 
