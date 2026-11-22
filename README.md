@@ -64,6 +64,8 @@ Images are published to Docker Hub (`bfren/wireguard`) and Quay.io (`quay.io/bfr
 | `wireguardX`, `wireguardX.Y` | `wireguard1.0`          | You want a `wireguard-tools` version        |
 | `wireguardX.Y.Z`             | `wireguard1.0.20260223` | You want an exact `wireguard-tools` release |
 
+A new `MAJOR` version means a breaking change. Before moving to one, read the [changelog](CHANGELOG.md), where each breaking change is marked **Breaking**.
+
 ## Configuration
 
 ### Ports
