@@ -30,6 +30,8 @@ services:
       - ./v/config:/config
 ```
 
+This example is also in [`docker-compose.yml`](docker-compose.yml).
+
 1. Point `vpn.example.com` at your server, and allow UDP port 51820 through your firewall or router.
 2. Run `docker compose up -d`. A configuration is created for each peer in `BF_WIREGUARD_PEERS`.
 3. Show a peer's configuration, and add it to that device's WireGuard app:

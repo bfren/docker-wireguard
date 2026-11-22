@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [5.0.3] - Unreleased
 
+### Added
+
+- `docker-compose.yml` - the Quickstart example as a file you can copy.
+
 ### Fixed
 
 - README: the Quickstart is now numbered steps, the helper commands table shows how to run each command, and the choices
