@@ -30,7 +30,11 @@ services:
       - ./v/config:/config
 ```
 
-Run `docker compose up -d`, then show a peer's configuration:
+This example is also in [`docker-compose.yml`](docker-compose.yml).
+
+1. Point `vpn.example.com` at your server, and allow UDP port 51820 through your firewall or router.
+2. Run `docker compose up -d`. A configuration is created for each peer in `BF_WIREGUARD_PEERS`.
+3. Show a peer's configuration, and add it to that device's WireGuard app:
 
 ```sh
 docker compose exec wireguard wg-qr fred-phone      # scan with the WireGuard app
@@ -56,9 +60,11 @@ Images are published to Docker Hub (`bfren/wireguard`) and Quay.io (`quay.io/bfr
 | `latest`                     |                         | You always want the newest image            |
 | `MAJOR`                      | `5`                     | You want updates, but not breaking changes  |
 | `MINOR`                      | `5.0`                   | You want fixes only - **recommended**       |
-| `VERSION`                    | `5.0.2`                 | You want to pin this image exactly          |
+| `VERSION`                    | `5.0.3`                 | You want to pin this image exactly          |
 | `wireguardX`, `wireguardX.Y` | `wireguard1.0`          | You want a `wireguard-tools` version        |
 | `wireguardX.Y.Z`             | `wireguard1.0.20260223` | You want an exact `wireguard-tools` release |
+
+A new `MAJOR` version means a breaking change. Before moving to one, read the [changelog](CHANGELOG.md), where each breaking change is marked **Breaking**.
 
 ## Configuration
 
@@ -116,14 +122,14 @@ Peer names must be unique, and are used as folder names. Because addresses are g
 
 ### Helper commands
 
-Run these with `docker exec <container> <command>` (add `-it` for `wg-show`).
+Run these with `docker exec <container> <command>`, e.g. `docker exec wireguard wg-qr fred-phone`. `wg-show` needs `-it`: `docker exec -it wireguard wg-show`.
 
-| Command      | Arguments | Description                                                          |
-| ------------ | --------- | -------------------------------------------------------------------- |
-| `wg-conf`    | peer      | Show a peer's configuration.                                         |
-| `wg-qr`      | peer      | Show a peer's configuration as a QR code.                            |
-| `wg-clients` |           | List peers with their address, traffic and when they were last seen. |
-| `wg-show`    |           | `wg show` with peer names, refreshing every 2 seconds.               |
+| Command          | Description                                                          |
+| ---------------- | -------------------------------------------------------------------- |
+| `wg-conf <peer>` | Show a peer's configuration.                                         |
+| `wg-qr <peer>`   | Show a peer's configuration as a QR code.                            |
+| `wg-clients`     | List peers with their address, traffic and when they were last seen. |
+| `wg-show`        | `wg show` with peer names, refreshing every 2 seconds.               |
 
 ## Testing
 
@@ -160,7 +166,10 @@ It is a private range that is unlikely to clash with a home or office network, o
 
 ### I'm upgrading from an image that used `187.0.0` - what do I need to do?
 
-Older images used `187.0.0` by default, which is a public range. To keep your peers' existing configuration, set `BF_WIREGUARD_IP_RANGE=187.0.0`. To move to the new default, recreate the container, then show each peer's configuration again and update their devices.
+Older images used `187.0.0` by default, which is a public range. Either:
+
+* **keep your peers' existing configuration** - set `BF_WIREGUARD_IP_RANGE=187.0.0`, or
+* **move to the new default** - recreate the container, then show each peer's configuration again (`wg-qr` or `wg-conf`) and update their devices.
 
 ### Can peers reach each other, or the server's network?
 

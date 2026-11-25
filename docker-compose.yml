@@ -1,0 +1,15 @@
+services:
+  wireguard:
+    image: quay.io/bfren/wireguard:5.0
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+    ports:
+      - "0.0.0.0:51820:51820/udp"
+    environment:
+      - BF_WIREGUARD_EXTERNAL_ADDRESS=vpn.example.com
+      - BF_WIREGUARD_PEERS=fred-phone fred-laptop jones-phone
+    volumes:
+      - ./v/config:/config
